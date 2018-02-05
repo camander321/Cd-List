@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using Cds.Models;
 
 namespace Project.Controllers
 {
@@ -11,13 +14,25 @@ namespace Project.Controllers
             return View();
         }
 
-        // [Route("/greeting_card")]
-        // public ActionResult GreetingCard()
-        // {
-        //     LetterVariable myLetterVariable = new LetterVariable();
-        //     myLetterVariable.SetRecipient(Request.Query["recipient"]);
-        //     myLetterVariable.SetSender(Request.Query["sender"]);
-        //     return View("Letter", myLetterVariable);
-        // }
+        [HttpPost("/list/clear")]
+        public ActionResult Clear()
+        {
+            Cd.Clear();
+            return View();
+        }
+
+        [Route("/showStuff")]
+        public ActionResult List()
+        {
+            Cd newCd = new Cd(
+                Request.Form["title"],
+                Request.Form["artist"],
+                Request.Form["price"]
+            );
+            newCd.Save();
+
+            List<Cd> allCds = Cd.GetAll();
+            return View(allCds);
+        }
     }
 }
