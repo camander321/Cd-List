@@ -35,6 +35,11 @@ namespace Cds.Models
     {
       if (_title.Length == 0 || _artist.Length == 0 || _price.Length == 0)
         return;
+
+      foreach (var cd in _instances)
+        if (_title == cd._title && _artist == cd._artist && _price == cd._price)
+          return;
+
       _instances.Add(this);
     }
 

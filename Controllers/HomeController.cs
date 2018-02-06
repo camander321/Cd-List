@@ -8,21 +8,15 @@ namespace Project.Controllers
     public class HomeController : Controller
     {
 
-        [Route("/")]
+        [Route("/")]                            //  <-----  this is the relative url used by form actions. I think.
         public ActionResult Form()
         {
-            return View();
+            return View("Form");                //  <-----  this is what determines which view will be passed to user. If no argument, 
+                                                //          it will use the name of the funciton? WTF?
         }
 
-        [HttpPost("/list/clear")]
-        public ActionResult Clear()
-        {
-            Cd.Clear();
-            return View();
-        }
-
-        [Route("/showStuff")]
-        public ActionResult List()
+        [Route("/new")]
+        public ActionResult AddItem()
         {
             Cd newCd = new Cd(
                 Request.Form["title"],
@@ -30,9 +24,22 @@ namespace Project.Controllers
                 Request.Form["price"]
             );
             newCd.Save();
+            return View("Form");
+        }
 
+        [HttpPost("/clear")]
+        public ActionResult ClearList()
+        {
+            Cd.Clear();
             List<Cd> allCds = Cd.GetAll();
-            return View(allCds);
+            return View("List", allCds);
+    }
+
+        [Route("/showStuff")]
+        public ActionResult List()
+        {
+            List<Cd> allCds = Cd.GetAll();
+            return View("List", allCds);
         }
     }
 }

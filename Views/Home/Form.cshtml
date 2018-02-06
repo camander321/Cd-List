@@ -8,12 +8,16 @@
   <body>
     <div class="jumbotron">
       <h1>Enter Some CD Info</h1>
-      <form action="showStuff" method="post">
+      <form action="/new" method="post">
         <label for="title">Title<input type="text" name="title"></label>
         <label for="artist">Artist<input type="text" name="artist"></label>
         <label for="price">Price<input type="text" name="price"></label>
 
-        <button type="submit" name="button">Submit</button>
+        <button type="submit" name="button">Add The Thing</button>
+      </form>
+
+	  <form action="/showStuff" method="post">
+        <button type="submit" name="add">Show The Stuff</button>
       </form>
     </div>
 
