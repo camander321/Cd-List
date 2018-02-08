@@ -1,34 +1,32 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset='utf-8'>
-    <title>Show Stuff</title>
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
-  </head>
-  <body>
-    <div class="jumbotron">
-      <h1>Here is the CD Info</h1>
-      @if (Model.Count == 0)
-      {
-        <p>We're sorry, but we’re out of stock!</p>
-      }
 
-      @foreach (var album in Model)
-      {
-        <h4>@album.GetTitle()</h4>
-        <p>By: @album.GetArtist()</p>
-        <p>Price: $@album.GetPrice()</p>
-      }
-    </div>
-    <div class="well">
-      <form action="/" method="post">
-        <button type="submit" name="add">Add More Stuff</button>
-      </form>
+@{
+  Layout = "_Layout";
+}
 
-      <form action="/clear" method="post">
-        <button type="submit" name="clear">Clear List</button>
-      </form>
-    </div>
+<div class="jumbotron">
+  <h1>Here is the CD Info</h1>
+  @if (Model.Count == 0)
+  {
+    <p>We're sorry, but we’re out of stock!</p>
+  }
 
-  </body>
-</html>
+  @foreach (var album in Model)
+  {
+    <h4>@album.GetTitle()</h4>
+    <p>By: @album.GetArtist()</p>
+    <p>Price: $@album.GetPrice()</p>
+  }
+</div>
+<div class="well">
+  <form action="/add-form" method="post">
+    <button type="submit" name="add">Add More Stuff</button>
+  </form>
+
+  <form action="/artist/search" method="get">
+    <button type="submit" name="add">Search By Artist</button>
+  </form>
+
+  <form action="/clear" method="post">
+    <button type="submit" name="clear">Clear List</button>
+  </form>
+</div>

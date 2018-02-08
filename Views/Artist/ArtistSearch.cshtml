@@ -1,0 +1,17 @@
+@{
+  Layout = "_Layout";
+}
+
+<div class="jumbotron">
+  <h1>Search By Artist</h1>
+
+  @foreach (var artist in Model)
+  {
+    <a href="/artist/result/@artist"><h4>@artist</h4></a>
+  }
+
+  <form action="/artist/result" method="get">
+    <input type="text" name="artist" placeholder="Artist">
+    <button type="submit" class="btn btn-info" name="button">Search</button>
+  </form>
+</div>
